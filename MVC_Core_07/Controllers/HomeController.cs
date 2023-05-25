@@ -5,6 +5,8 @@ using System.Diagnostics;
 
 namespace MVC_Core_07.Controllers
 {
+    //[Route("Inventory/products/{action}")]
+    //[Route("Inventory/products")]
     public class HomeController : Controller
     {
 
@@ -15,13 +17,20 @@ namespace MVC_Core_07.Controllers
             new Service(3,"نقره ای"),
             new Service(4,"پلاتین")
         };
-
-        public IActionResult Index()
+        //[Route("MyIndex/{productName}/{model}")]
+        public IActionResult Index(string productName, string model)
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult Contact()
+
+
+        public IActionResult ProjectDetails(long id)
+        {
+            var projectById = Data.ProjectStore.GetProjectsBy(id);
+            return View(projectById);
+        }
+        //[HttpGet("MyContact/{id}")]
+        public IActionResult Contact(int id)
         {
 
             var model = new ContactForm
